@@ -1,9 +1,8 @@
-const todos = [
-    {
-        id: 1,
-        title: "lunch",
-        description: "lunch time"
-    }
-]
+const locationData = [{
+    id: 1,
+    activity: "Chipotle",
+    description: "Mexican food",
+    location: "Irvine, CA"
+}]
 
-export default todos;
+export default locationData

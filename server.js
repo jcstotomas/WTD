@@ -1,32 +1,33 @@
-import express from 'express'
+import express from 'express';
 import db from './db/db';
-import bodyParser from 'body-parser'
+import bodyParser from 'body-parser';
 
 const app = express();
 
 //Parse incoming requests using middleware
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}))
-
-app.get('/api/v1/todos', (req, res) => 
-    {
-        res.status(200).send({
-            success: 'true',
-            messsage: 'todos retreived successfully',
-            todos: db
-        })
-    });
+app.use(bodyParser.urlencoded({ extended: false }))
 
 
-app.get('/api/v1/todos/:id', (req,res) => {
+// GET 
+app.get('/api/v1/wtd', (req, res) => {
+    res.status(200).send({
+        success: 'true',
+        messsage: 'Activity Loaded Successfully',
+        data: db
+    })
+});
+
+
+app.get('/api/v1/wtd/:id', (req, res) => {
     const id = parseInt(req.params.id, 10);
 
-    db.map((todo) => {
-        if (todo.id === id) {
+    db.map((locationData) => {
+        if (locationData.id === id) {
             return res.status(200).send({
                 success: 'true',
-                message: 'todo retrieved successfully',
+                message: 'Data retrieved successfully',
                 todo,
             })
         }
@@ -34,38 +35,55 @@ app.get('/api/v1/todos/:id', (req,res) => {
     return res.status(404).send({
 
         success: 'false',
-
-        message: 'todo does not exist',
+        message: 'data does not exist',
     })
 })
 
 
 //POST
-app.post('/api/v1/todos', (req, res) => {
+/*
+
+
+ */
+
+app.post('/api/v1/wtd', (req, res) => {
+    // DATA STRUCTURE
+    /*
+    {
+        "activity" : "eat"/"activity"
+        "mood" : "1-10"
+        "cuisine(s)" : "thai"
+        "location" : "Irvine"
+        
+    }
+
+    */
     console.log(req.body)
-    if (!req.body.title){
+    if (!req.body.activity) {
         return res.status(400).send({
             success: 'false',
-            message: 'title is required'
+            message: 'activity is required'
         });
-    } else if (!req.body.description) {
+    } else if (!req.body.location) {
         return res.status(400).send({
-            success: 'false', 
-            message: 'description is required'
+            success: 'false',
+            message: 'location is required'
         });
     }
 
-    const todo = {
-        id: db.length + 1, 
-        title: req.body.title,
-        description: req.body.description
+    const inputInfo = {
+        id: db.length + 1,
+        activity: req.body.activity,
+        location: req.body.location
     }
 
-    db.push(todo);
+//Query processing
+    
+    db.push(inputInfo);
     return res.status(201).send({
         success: 'true',
-        message: 'todo added successfully',
-        todo
+        message: 'Location added successfully',
+        inputInfo
     })
 
 });
@@ -74,9 +92,5 @@ app.post('/api/v1/todos', (req, res) => {
 const PORT = 5000;
 
 app.listen(PORT, () => {
-    console.log('server running on port ${PORT}')
+console.log('server running on port ${PORT}')
 });
-    
-
-
-
