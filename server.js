@@ -1,9 +1,15 @@
+'use-strict'
+
 import express from 'express';
 import db from './db/db';
 import bodyParser from 'body-parser';
+import yelp from 'yelp-fusion';
+
+
 
 const app = express();
-
+const apiKey = "";
+const client  = yelpg.client(apiKey);
 //Parse incoming requests using middleware
 
 app.use(bodyParser.json());
@@ -20,25 +26,6 @@ app.get('/api/v1/wtd', (req, res) => {
 });
 
 
-app.get('/api/v1/wtd/:id', (req, res) => {
-    const id = parseInt(req.params.id, 10);
-
-    db.map((locationData) => {
-        if (locationData.id === id) {
-            return res.status(200).send({
-                success: 'true',
-                message: 'Data retrieved successfully',
-                todo,
-            })
-        }
-    });
-    return res.status(404).send({
-
-        success: 'false',
-        message: 'data does not exist',
-    })
-})
-
 
 //POST
 /*
@@ -47,17 +34,9 @@ app.get('/api/v1/wtd/:id', (req, res) => {
  */
 
 app.post('/api/v1/wtd', (req, res) => {
-    // DATA STRUCTURE
-    /*
-    {
-        "activity" : "eat"/"activity"
-        "mood" : "1-10"
-        "cuisine(s)" : "thai"
-        "location" : "Irvine"
-        
-    }
+    var searchParameters = {};
+    var searchResults = {};
 
-    */
     console.log(req.body)
     if (!req.body.activity) {
         return res.status(400).send({
@@ -69,22 +48,45 @@ app.post('/api/v1/wtd', (req, res) => {
             success: 'false',
             message: 'location is required'
         });
+    }else if (!req.body.cuisine){
+        return res.status(400).send({
+            success: 'false',
+            message: 'cuisine is missing'
+        })
     }
 
-    const inputInfo = {
-        id: db.length + 1,
-        activity: req.body.activity,
-        location: req.body.location
-    }
+
+
 
 //Query processing
-    
-    db.push(inputInfo);
+    //USES YELP API TO PROCESS QUERY 
+    searchParameters["activity"] = req.body.activity;
+    searchParameters["location"] = req.body.location;
+    searchParameters["term"] = req.body.cuisine;
+    searchParameters['limit'] = 10;
+
+    client.search(searchParameters).then(response => {
+        const result = response.jsonBody.businesses[randomizeBusiness(searchParameters["limit"])];
+        
+        searchResults["place"] = result["name"]
+        searchResults["rating"] = result["rating"]
+
+        console.log(searchResults);
+
+
+
     return res.status(201).send({
         success: 'true',
         message: 'Location added successfully',
-        inputInfo
-    })
+        searchResults  
+        })
+    }).catch(e => {
+        console.log("error");
+          res.render('index', { locationTerm: null, error: "Error, please re-enter your information"});
+      
+      });
+
+
 
 });
 
@@ -94,3 +96,15 @@ const PORT = 5000;
 app.listen(PORT, () => {
 console.log('server running on port ${PORT}')
 });
+
+
+
+
+//Helper Functions 
+
+function randomizeBusiness (max, min = 0) 
+{
+
+	var random =Math.floor(Math.random() * (+max - +min)) + +min;
+	return random;
+}
