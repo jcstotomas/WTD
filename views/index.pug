@@ -1,0 +1,27 @@
+doctype html 
+
+html
+    head 
+    meta(charset='utf-8')
+    title WTD
+    //- //link(rel='stylesheet', type='text/css', href='/css/style.css')
+    link(href='https://fonts.googleapis.com/css?family=Open+Sans:300', rel='stylesheet', type='text/css')
+body
+    h1 WTD
+    .container
+        div
+            fieldset
+                form
+                    input(type='radio', id = "activity", name = 'activity', value = "actvity") 
+                    label(for="activity") Activity
+                    
+                    input(type='radio', id = "eat", name = 'activity', value = "eat") 
+                    label(for="eat") Eat
+
+        fieldset
+            form(action='/', method='post')
+                input.ghost-input(name='term', type='text', placeholder='Search a term', required)          
+                input.ghost-input(name='location', type='text', placeholder='Enter location', required)
+                input.ghost-button(type='submit', value='WTD')
+            if (locationName)
+                p=locationName

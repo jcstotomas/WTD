@@ -8,59 +8,39 @@ import yelp from 'yelp-fusion';
 
 
 const app = express();
-const apiKey = "";
-const client  = yelpg.client(apiKey);
+const apiKey = "x4boCEjaccL6otSoUD7vMepPyljMPDyQLY25d-tGqO4niXHY02orCyyHhErrFdJ6daaMXZJJ0PqTCnDlu373YWsXbzWJGTgnp8gqZkS-CJcqpsbQiXV-ZEegvu01W3Yx";
+const client  = yelp.client(apiKey);
 //Parse incoming requests using middleware
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }))
 
 
-// GET 
-app.get('/api/v1/wtd', (req, res) => {
-    res.status(200).send({
-        success: 'true',
-        messsage: 'Activity Loaded Successfully',
-        data: db
-    })
-});
-
-
-
-//POST
-/*
-
-
- */
-
+// // POST 
+//
 app.post('/api/v1/wtd', (req, res) => {
     var searchParameters = {};
     var searchResults = {};
 
     console.log(req.body)
-    if (!req.body.activity) {
-        return res.status(400).send({
-            success: 'false',
-            message: 'activity is required'
-        });
-    } else if (!req.body.location) {
-        return res.status(400).send({
-            success: 'false',
-            message: 'location is required'
-        });
-    }else if (!req.body.cuisine){
+
+    if (!req.body.cuisine){
         return res.status(400).send({
             success: 'false',
             message: 'cuisine is missing'
+        })
+    } else if (!req.body.location){
+        return res.status(400).send({
+            success: 'false',
+            message: 'location is missing'
         })
     }
 
 
 
-
 //Query processing
     //USES YELP API TO PROCESS QUERY 
-    searchParameters["activity"] = req.body.activity;
+    //searchParameters["activity"] = req.body.activity;
     searchParameters["location"] = req.body.location;
     searchParameters["term"] = req.body.cuisine;
     searchParameters['limit'] = 10;
@@ -71,18 +51,17 @@ app.post('/api/v1/wtd', (req, res) => {
         searchResults["place"] = result["name"]
         searchResults["rating"] = result["rating"]
 
-        console.log(searchResults);
+        //console.log(searchResults);
 
 
 
     return res.status(201).send({
         success: 'true',
-        message: 'Location added successfully',
+        message: 'Restaurant Retrieved',
         searchResults  
         })
     }).catch(e => {
         console.log("error");
-          res.render('index', { locationTerm: null, error: "Error, please re-enter your information"});
       
       });
 

@@ -5,4 +5,4 @@ const locationData = [{
     location: "Irvine, CA"
 }]
 
-export default locationData
+module.exports = locationData
