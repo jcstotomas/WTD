@@ -17,6 +17,13 @@ app.get('/', (req, res) => {
 
 })
 
+app.get('/index.js', function (req, res) {
+  res.sendFile("/Users/jeremy/Desktop/WTD/index.js");
+});
+
+
+
+
 app.post('/', (req, res) => {
   const options = {
     method: 'POST',
@@ -51,3 +58,5 @@ const PORT = 4000;
 app.listen(PORT, () => {
 console.log('server running on port ${PORT}')
 });
+
+

@@ -6,22 +6,37 @@ html
     title WTD
     //- //link(rel='stylesheet', type='text/css', href='/css/style.css')
     link(href='https://fonts.googleapis.com/css?family=Open+Sans:300', rel='stylesheet', type='text/css')
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js")
+
 body
     h1 WTD
     .container
         div
             fieldset
                 form
+                    input(type='radio', id = "eat", name = 'activity', value = "eat", checked ="checked") 
+                    label(for="eat") Eat
+
                     input(type='radio', id = "activity", name = 'activity', value = "actvity") 
                     label(for="activity") Activity
                     
-                    input(type='radio', id = "eat", name = 'activity', value = "eat") 
-                    label(for="eat") Eat
 
-        fieldset
-            form(action='/', method='post')
-                input.ghost-input(name='term', type='text', placeholder='Search a term', required)          
-                input.ghost-input(name='location', type='text', placeholder='Enter location', required)
-                input.ghost-button(type='submit', value='WTD')
-            if (locationName)
-                p=locationName
+        div(id = "foodSearch")
+            fieldset
+                form(action='/', method='post')
+                    input.ghost-input(name='term', type='text', placeholder='Search a term', required)          
+                    input.ghost-input(name='location', type='text', placeholder='Enter location', required)
+                    input.ghost-button(type='submit', value='WTD')
+                if (locationName)
+                    p=locationName
+
+        div(id = "activitySearch" style="display:none")
+            fieldset
+                form(action='/activity', method='post')
+                    input.ghost-button(type='submit', value = "WTD")
+
+
+
+
+    script(src="index.js")
+

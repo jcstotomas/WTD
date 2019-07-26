@@ -87,3 +87,7 @@ function randomizeBusiness (max, min = 0)
 	var random =Math.floor(Math.random() * (+max - +min)) + +min;
 	return random;
 }
+
+
+
+
