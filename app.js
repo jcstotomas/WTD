@@ -21,7 +21,17 @@ app.get('/index.js', function (req, res) {
   res.sendFile("/Users/jeremy/Desktop/WTD/index.js");
 });
 
+app.post('/activity', (req, res) =>{
 
+  request('http://localhost:5000/api/v1/activity', function(err , result, body){
+    var jsonBody = JSON.parse(body)
+   // console.log(body.activity)
+    if (jsonBody.success == 'true'){
+      res.render('index', {activityName: jsonBody.activity})
+      console.log("success")
+    }
+  })
+}) 
 
 
 app.post('/', (req, res) => {

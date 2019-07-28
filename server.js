@@ -6,7 +6,6 @@ import bodyParser from 'body-parser';
 import yelp from 'yelp-fusion';
 
 
-
 const app = express();
 const apiKey = "x4boCEjaccL6otSoUD7vMepPyljMPDyQLY25d-tGqO4niXHY02orCyyHhErrFdJ6daaMXZJJ0PqTCnDlu373YWsXbzWJGTgnp8gqZkS-CJcqpsbQiXV-ZEegvu01W3Yx";
 const client  = yelp.client(apiKey);
@@ -15,10 +14,29 @@ const client  = yelp.client(apiKey);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }))
 
+app.get('/api/v1/activity', (req, res) => {
+    var length = db.length;
+    if (length == 0)
+    {
+        return res.status(201).send({
+            success: 'true',
+            activity: db[0],
+        })
+    }else{
+        var randInt = Math.floor(Math.random() * length);
+        console.log("success")
+        return res.status(201).send({
+            success:'true',
+            activity: db[randInt],
+        })
+    }
+})
 
 // // POST 
 //
 app.post('/api/v1/wtd', (req, res) => {
+    db.push("hello")
+    
     var searchParameters = {};
     var searchResults = {};
 
