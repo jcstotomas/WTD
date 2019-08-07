@@ -13,3 +13,8 @@ $(document).ready(function() {
         }
     });
   });
+
+
+  function getData(){
+       return false;
+  }

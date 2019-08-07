@@ -32,7 +32,7 @@ body
 
         div(id = "activitySearch" style="display:none")
             fieldset
-                form(action='/activity', method='post')
+                form(action='/activity', method='post', onsubmit="return false")
                     input.ghost-button(type='submit', value = "WTD")
 
                 if (activityName)
