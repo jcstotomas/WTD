@@ -21,6 +21,28 @@ app.get('/index.js', function (req, res) {
   res.sendFile("/Users/jeremy/Desktop/WTD/index.js");
 });
 
+app.post('/add', (req,res) => {
+  const options = {
+    method: 'POST',
+    uri: 'http://localhost:5000/api/v1/add',
+    body: {
+        //activity: "eat",
+        cuisine:  req.body.activity,
+        error: null
+
+      },
+      json: true 
+
+  }
+  request(options, function(err, result, body) { 
+    if (body.success ==  'true'){
+      res.render('index', {addActivity: body.message} )
+      }
+    }
+  
+);
+})
+
 app.post('/activity', (req, res) =>{
 
   request('http://localhost:5000/api/v1/activity', function(err , result, body){

@@ -34,8 +34,18 @@ app.get('/api/v1/activity', (req, res) => {
 
 // // POST 
 //
+
+app.post('/api/v1/add', (req,res) =>{
+    console.log(req.body);
+
+    db.push(req.body.activity)
+    return res.status(201).send({
+        success: 'true',
+        message: 'Activity Added To Database',
+        })
+    
+})
 app.post('/api/v1/wtd', (req, res) => {
-    db.push("hello")
     
     var searchParameters = {};
     var searchResults = {};

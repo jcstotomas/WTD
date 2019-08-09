@@ -19,6 +19,9 @@ body
 
                     input(type='radio', id = "activity", name = 'activity', value = "actvity") 
                     label(for="activity") Activity
+
+                    input(type='radio', id = "add", name = 'activity', value = "add") 
+                    label(for="addActivity") Add Activity
                     
 
         div(id = "foodSearch")
@@ -32,12 +35,19 @@ body
 
         div(id = "activitySearch" style="display:none")
             fieldset
-                form(action='/activity', method='post', onsubmit="return false")
+                form(action='/activity', method='post', onsubmit="return true")
                     input.ghost-button(type='submit', value = "WTD")
 
                 if (activityName)
                     p=activityName
 
+        div(id = "addActivity")
+            fieldset
+                form(action='/add', method='post')
+                    input.ghost-input(name='term', type='text', placeholder='Add a term', required)          
+                    input.ghost-button(type='submit', value='Add')
+                if (addActivity)
+                    p=addActivity
 
 
 

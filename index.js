@@ -5,11 +5,19 @@ $(document).ready(function() {
         if($(this).attr('id') == 'eat') {
              $('#foodSearch').show(); 
              $('#activitySearch').hide();
+             $('#addActivity').hide();
+
         }
   
-        else {
+        else if ($(this).attr('id') == 'activity') {
              $('#foodSearch').hide();   
              $('#activitySearch').show();
+             $('#addActivity').hide();
+        }
+        else{
+          $('#foodSearch').hide();   
+          $('#activitySearch').hide();
+          $('#addActivity').show();
         }
     });
   });
