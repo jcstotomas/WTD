@@ -36,9 +36,10 @@ app.get('/api/v1/activity', (req, res) => {
 //
 
 app.post('/api/v1/add', (req,res) =>{
-    console.log(req.body);
+    console.log(res.body);
 
     db.push(req.body.activity)
+    console.log(req.body.activity);
     return res.status(201).send({
         success: 'true',
         message: 'Activity Added To Database',

@@ -1,27 +1,31 @@
 doctype html 
 
+
 html
     head 
     meta(charset='utf-8')
     title WTD
-    //- //link(rel='stylesheet', type='text/css', href='/css/style.css')
-    link(href='https://fonts.googleapis.com/css?family=Open+Sans:300', rel='stylesheet', type='text/css')
+    link(rel='stylesheet', type='text/css', href='/styles.css')
+    link(href='https://fonts.googleapis.com/css?family=Open+Sans&display=swap', rel='stylesheet', type='text/css')
+  
+
+
     script(src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js")
 
 body
-    h1 WTD
+    h1 What Are We Doing Today
     .container
         div
-            fieldset
-                form
-                    input(type='radio', id = "eat", name = 'activity', value = "eat", checked ="checked") 
-                    label(for="eat") Eat
+            
+           
+            input(type='button', class="btn",id = "eat", name = 'activity', value = "Eat", checked ="checked") 
+                    //- label(for="eat") Eat
 
-                    input(type='radio', id = "activity", name = 'activity', value = "actvity") 
-                    label(for="activity") Activity
+            input(type='button',class="btn", id = "activity", name = 'activity', value = "Activity") 
+                    //- label(for="activity") Activity
 
-                    input(type='radio', id = "add", name = 'activity', value = "add") 
-                    label(for="addActivity") Add Activity
+            input(type='button',class="btn", id = "add", name = 'activity', value = "Add Activity") 
+                    //- label(for="addActivity") Add Activity
                     
 
         div(id = "foodSearch")
@@ -41,10 +45,10 @@ body
                 if (activityName)
                     p=activityName
 
-        div(id = "addActivity")
+        div(id = "addActivity" style="display:none")
             fieldset
                 form(action='/add', method='post')
-                    input.ghost-input(name='term', type='text', placeholder='Add a term', required)          
+                    input.ghost-input(name='activityName', type='text', placeholder='Add a term', required)          
                     input.ghost-button(type='submit', value='Add')
                 if (addActivity)
                     p=addActivity

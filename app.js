@@ -3,11 +3,13 @@ const express = require('express');
 const request = require('request');
 const pug = require('pug');
 const bodyParser = require('body-parser');
+const path = require('path')
 
 const app = express();
 app.set('view engine', 'pug');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }))
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Create template with form fields to test if it works 
 
@@ -27,7 +29,7 @@ app.post('/add', (req,res) => {
     uri: 'http://localhost:5000/api/v1/add',
     body: {
         //activity: "eat",
-        cuisine:  req.body.activity,
+        activity:  req.body.activityName,
         error: null
 
       },

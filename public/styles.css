@@ -1,0 +1,45 @@
+body{
+    font-family: "Open Sans";
+    text-align: center;
+    background-color: #5EA9BE;
+    color: white;
+
+}
+input{
+    background-color: transparent;
+}
+form{
+    text-align: center;
+}
+
+h1{
+    text-align: center;
+    font-weight: lighter;
+}
+
+fieldset{
+    border: none;
+}
+
+.btn{
+    background-color: transparent;
+    color:white;
+    padding: 15px;
+    width: 100px;
+    height:50px;
+    font-size: 24px;
+    font-weight: lighter;
+}
+
+.ghost-input{
+    background-color: transparent;
+    border-color: white;
+    border-width: 1px;
+    color:white;
+}
+::placeholder{
+    color: white;
+}
+.ghost-button{
+    color:white;
+}
