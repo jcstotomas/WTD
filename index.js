@@ -1,7 +1,7 @@
 
 
 $(document).ready(function() {
-    $('input[type="radio"]').click(function() {
+    $('input[type="button"]').click(function() {
         if($(this).attr('id') == 'eat') {
              $('#foodSearch').show(); 
              $('#activitySearch').hide();
