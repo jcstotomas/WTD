@@ -36,22 +36,23 @@ body
                     input.ghost-button(type='submit', value='WTD')
                 if (locationName)
                     p=locationName
-
+                if (activityName)
+                    p=activityName
+                if (addActivity)
+                    p=addActivity 
         div(id = "activitySearch" style="display:none")
             fieldset
                 form(action='/activity', method='post', onsubmit="return true")
                     input.ghost-button(type='submit', value = "WTD")
 
-                if (activityName)
-                    p=activityName
+
 
         div(id = "addActivity" style="display:none")
             fieldset
                 form(action='/add', method='post')
                     input.ghost-input(name='activityName', type='text', placeholder='Add a term', required)          
                     input.ghost-button(type='submit', value='Add')
-                if (addActivity)
-                    p=addActivity
+
 
 
 
