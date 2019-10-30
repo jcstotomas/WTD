@@ -20,7 +20,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/index.js', function (req, res) {
-  res.sendFile("/Users/jeremy/Desktop/WTD/index.js");
+  res.sendFile(__dirname + "/index.js");
 });
 
 app.post('/add', (req,res) => {
